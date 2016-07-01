@@ -1,0 +1,35 @@
+--Text File Format
+
+create table olympic(athelete STRING,age INT,country STRING,year STRING,closing_date STRING,sport STRING,gold_count INT,silver_count INT,bronze_count INT,total_count INT) row format delimited fields terminated by '\t' stored as textfile;
+
+load data local inpath '/home/acadgild/Hive/olympix_data.csv' into table olympic;
+
+select * from olympic;
+
+--Sequence File Format
+
+create table olympic_sequencefile(athelete STRING,age INT,country STRING,year STRING,closing_date STRING,sport STRING,gold_count INT,silver_count INT,bronze_count INT,total_count INT) row format delimited fields terminated by '\t' stored as sequencefile;
+
+INSERT OVERWRITE TABLE olympic_sequencefile
+SELECT * FROM olympic;
+
+
+select * from olympic_sequencefile;
+
+--Rc file
+
+create table olympic_rcfile(athelete STRING,age INT,country STRING,year STRING,closing_date STRING,sport STRING,
+gold_count INT,silver_count INT,bronze_count INT,total_count INT) row format delimited fields terminated by '\t' stored as rcfile;
+
+INSERT OVERWRITE TABLE olympic_rcfile SELECT * FROM olympic;
+
+select * from olympic_rcfile;
+
+--Orc File
+
+create table olympic_orcfile(athelete STRING,age INT,country STRING,year STRING,closing_date STRING,sport STRING,gold_count INT,silver_count INT,bronze_count INT,total_count INT) row format delimited fields terminated by '\t' stored as orcfile;
+
+describe olympic_orcfile;
+
+INSERT OVERWRITE TABLE olympic_orcfile SELECT * FROM olympic;
+
